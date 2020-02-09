@@ -40,4 +40,18 @@ express()
             user = [];
         });
     })
+    .get('/cursuri', function (req, res,) {
+      // res.send(JSON.stringify(courses));
+      client.query('SELECT * FROM cursuri ', function (err, result) {
+          if (err) {
+              console.log(err);
+              res.status(400).send(err);
+          }
+          for(let i=0;i<result.rowCount;i++){
+              user [i] = result.rows[i];
+          }
+          res.status(200).send(JSON.stringify(user));
+          user = [];
+      });
+  })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
